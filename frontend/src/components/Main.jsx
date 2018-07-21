@@ -17,17 +17,9 @@ class Main extends React.Component {
 
     const data = new FormData();
     data.append('file', this.uploadInput.files[0]);
-    data.append('filename', this.fileName.value);
-
-
-    var myHeaders = new Headers({
-      // 'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
-      // 'mode': 'no-cors'
-    });
 
     fetch('http://localhost:8000/upload', {
       method: 'POST',
-      headers: myHeaders,
       body: data,
     }).then((response) => {
       response.json().then((body) => {
@@ -43,14 +35,12 @@ class Main extends React.Component {
         <div>
           <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
         </div>
-        <div>
-          <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter the desired name of file" />
-        </div>
         <br />
         <div>
           <button>Upload</button>
         </div>
         
+        <h2> Droplet details </h2>
         <div><pre>{JSON.stringify(this.state.dropdetails, null, 2) }</pre></div>
       </form>
     );
